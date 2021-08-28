@@ -185,7 +185,6 @@ function create_note(note){
   $.ajax({
     url: base_url+"/create-note",
     data: {"note":note},
-    beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer '+token);},
     type: "POST",
     success: function(response){
       if(response["status"] == "ok"){
