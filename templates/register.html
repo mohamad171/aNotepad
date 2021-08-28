@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یک نوت پد - ثبت نام</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+ 
+<body>
+
+    <!----- Start sign up box ----->
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-lg-7 col-xl-6 col-md-9 register">
+
+                <div class="card my-5">
+
+                    <div class="card-body">
+                        <h5 class="shadow-sm text-center mb-4 py-3"> عضویت در سایت </h5>
+
+                        <form  method="post" id="register_frm">
+                            <div class="form-group">
+                                <label for="name"> نام : </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text  my-icon"><i class="fa fa-user align-middle"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" name="first_name" placeholder="نام خود را وارد کنید">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">نام خانوادگی :</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text  my-icon"> <i class="fa fa-user align-middle"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" name="last_name" placeholder="نام خانوادگی خود را وارد کنید ">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">ایمیل : </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text  my-icon"> <i class="fa fa-user-plus align-middle"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" name="username" placeholder="ایمیل خود را وارد کنید ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""> رمز عبور : </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text  my-icon"> <i class="fa fa-lock align-middle"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" name="password" placeholder="رمز عبور خود را وارد کنید">
+                                </div>
+                            </div>
+
+                            <button type="button" class="register_btn btn btn-primary btn-block rounded-pill custom-btn font-13 mt-4">ثبت نام</button>
+
+                            <p class="text-center my-3 font-12 vazir">قبلا در سایت ثبت نام کرده اید ؟ <a href="{% url 'index' %}" class="login vazir">وارد شوید</a></p>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/myscript.js' %}"></script>
+
+    <script>
+    $(".register_btn").click(function(){
+        
+        register($("#register_frm"))
+        $(this).append('<i class="fas fa-circle-notch fa-spin mr-1" id="loading"></i>')
+    })
+    
+    
+    
+    </script>
+</body>
+</html>

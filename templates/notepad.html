@@ -1,0 +1,92 @@
+{% extends "parent.html" %}
+{% block title %} صفحه اصلی {% endblock %}
+{% block content %}
+<div class="container mt-2 ">
+<div class="form-group">
+    {% comment %} <textarea class="form-control" placeholder="چیزی بنویس..." name="editor1" id="note" style="resize: none;" rows="19"></textarea> {% endcomment %}
+<div id="editor2" class="p-2 text-white" contenteditable="true" style="height: 60vh;background-color:#455a64;border:dashed 1px #b0bec5;border-radius:5px;5px;5px;5px">
+</div>
+
+</div>
+  
+</div>
+<div class="d-flex justify-content-center">
+    <button id="create_note" class="btn btn-outline-primary">ساخت لینک نوت</button>
+    <br/>
+    <div class="mr-3 d-flex justify-content-center" style="height: 5vh;width: 50vh;background-color:#455a64;border:dashed 1px #b0bec5;border-radius:5px;5px;5px;5px;display:none;" class="mr-3" id="link_output">
+      
+    </div>
+</div>
+<div class="d-flex justify-content-start text-light mt-1">
+    <ul>
+    <li>درصورت ساخت حساب کاربری در هر زمان به نوت ها دسترسی دارید</li>
+    <li>استفاده از این سرویس کاملا رایگان میباشد.</li>
+    </ul>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% block script %}
+<script>
+$(document).ready(function(){
+		
+  
+  CKEDITOR.disableAutoInline = true;
+  CKEDITOR.inline( 'editor2' );
+
+  CKEDITOR.editorConfig = function( config ) {
+	config.toolbarGroups = [
+		'/',
+		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+		{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+		{ name: 'forms', groups: [ 'forms' ] },
+		'/',
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+		{ name: 'links', groups: [ 'links' ] },
+		{ name: 'insert', groups: [ 'insert' ] },
+		'/',
+		{ name: 'styles', groups: [ 'styles' ] },
+		{ name: 'colors', groups: [ 'colors' ] },
+		{ name: 'tools', groups: [ 'tools' ] },
+		{ name: 'others', groups: [ 'others' ] },
+		{ name: 'about', groups: [ 'about' ] }
+	];
+
+	config.removeButtons = 'Source,Save,Templates,NewPage,ExportPdf,Preview,PasteText,PasteFromWord,Undo,Find,Replace,SelectAll,Scayt,Form,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Image,Flash,HorizontalRule,Smiley,SpecialChar,Iframe,Maximize,ShowBlocks,About';
+};
+
+
+ $(".login_btn").click(function(){
+   var username = $("#email").val()
+   var password = $("#password").val()
+   if(username.length !== 0 && password.length !== 0){
+      $(this).append('<i class="fas fa-circle-notch fa-spin mr-1" id="loading"></i>')
+      login(username,password)
+   }else{
+     alert("نام کاربری و رمز عبور را وارد کنید")
+   }
+ })
+
+ $("#create_note").click(function(){
+   var note = CKEDITOR.instances.editor2.getData();
+   if(note.length !== 0){
+     $(this).append('<i class="fas fa-circle-notch fa-spin mr-1" id="loading"></i>')
+      create_note(note)
+   }else{
+     alert("چیزی بنویسید")
+   }
+
+
+ })
+ 
+
+
+})
+</script>
+{% endblock %}

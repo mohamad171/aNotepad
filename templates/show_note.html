@@ -1,0 +1,39 @@
+{% extends "parent.html" %}
+{% block title %} {{note.random_string}} {% endblock %}
+{% block content %}
+<div class="container mt-2 ">
+<div class="form-group">
+
+
+<div class="p-2 text-white" style="height: 60vh;background-color:#455a64;border:dashed 1px #b0bec5;">
+
+{{note.note|safe}}
+
+</div>
+
+
+  </div>
+</div>
+
+<div class="d-flex justify-content-start text-light mt-1">
+    <ul>
+    <li>درصورت ساخت حساب کاربری در هر زمان به نوت ها دسترسی دارید</li>
+    <li>استفاده از این سرویس کاملا رایگان میباشد.</li>
+    </ul>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% block script %}
+<script>
+$(document).ready(function(){
+	
+
+
+})
+</script>
+{% endblock %}

@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('fonts/IRANSansWeb.eot'); /* IE9 Compat Modes */
+  src: url('fonts/IRANSansWeb.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/IRANSansWeb.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/IRANSansWeb.woff') format('woff'), /* Pretty Modern Browsers */
+       url('fonts/IRANSansWeb.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/IRANSansWeb.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+ p {
+  font-family : "IRANSansWeb"
+ }
+ h1 {
+  font-family: "IRANSansWeb"
+ }
+ a{
+ 	font-family: "IRANSansWeb"
+ }
+ body{
+ 	font-family: "IRANSansWeb"
+ }
+ input[type="submit"]{
+ 	font-family: "IRANSansWeb"
+ }
+ input{
+ 	font-family: "IRANSansWeb"
+ }
+  select{
+ 	font-family: "IRANSansWeb"
+ }
+   option{
+ 	font-family: "IRANSansWeb"
+ }
+ div{
+ 	font-family: "IRANSansWeb"
+ }
+ textarea[type="text"]{
+ 	font-family: "IRANSansWeb"
+ }
+ textarea{
+ 	font-family: "IRANSansWeb"
+ }
+ tr td{
+    font-family: "IRANSansWeb"
+ }
+.ck.ck-editor__editable_inline[dir=ltr]{
+     text-align: right !important;
+ }
