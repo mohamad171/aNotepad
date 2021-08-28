@@ -6,4 +6,4 @@ class Note(models.Model):
     note = models.TextField()
     random_string = models.CharField(max_length=10)
     def link(self):
-        return f"http://127.0.0.1:8000/v/{self.random_string}"
+        return f"http://www.anotepad.ir/v/{self.random_string}"
