@@ -1,5 +1,5 @@
 
-base_url = "http://anotepad.ir"
+base_url = "http://www.anotepad.ir"
 
 function check_login(){
   var token = localStorage.getItem('access_token');
