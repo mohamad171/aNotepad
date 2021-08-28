@@ -1,5 +1,5 @@
 
-base_url = "http://127.0.0.1:8000"
+base_url = "http://anotepad.ir"
 
 function check_login(){
   var token = localStorage.getItem('access_token');
