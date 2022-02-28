@@ -1,6 +1,5 @@
 from django.views.generic.base import View
 from rest_framework.response import Response
-from cutomer import cognito
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from rest_framework.views import APIView
@@ -18,49 +17,46 @@ from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 
 
 
- 
-cog = cognito.Cognito()
-
 class Index(View):
     def get(self,request):
         
         return render(request,"notepad.html")
 
 
-class SignUp(APIView):
-    serializer_class = SignupUserSerilizer
-    def post(self,request):
-        serilize = self.serializer_class(data=request.POST)
-        if serilize.is_valid(raise_exception=True):
-            user = serilize.save()
-            # token = token = Token.objects.create(user=user)
-            return JsonResponse({"status":"ok"})
-        else:
-            return JsonResponse({"status":"faild"},status=422)
-    def get(self,request):
-        return render(request,"register.html")
-class Login(APIView):
-    def post(self,request):
-        serilize = LoginSerilizer(data=request.POST)
-        if serilize.is_valid(raise_exception=True):
-            cleaned_data = serilize.validated_data
-            resp,message=cog.login(cleaned_data["username"],cleaned_data["password"])
-            if message == "incorrect":
-                return Response({"error":True,"message":"username or password invalid"})
-            elif message == "not_cnofirmed":
-                return Response({"error":True,"message":"username is not confirmed"})
-            else:
-                access_token = resp['AuthenticationResult']['AccessToken']
-                response = cog.get_user(access_token)
-                
-                user = User.objects.filter(username=response["email"]).first()
-                refresh = RefreshToken.for_user(user)
-
-
-                return Response({"error":False,"data":{
-                    "access_token":str(refresh.access_token),
-                    "refresh":str(refresh)
-                }})
+# class SignUp(APIView):
+#     serializer_class = SignupUserSerilizer
+#     def post(self,request):
+#         serilize = self.serializer_class(data=request.POST)
+#         if serilize.is_valid(raise_exception=True):
+#             user = serilize.save()
+#             # token = token = Token.objects.create(user=user)
+#             return JsonResponse({"status":"ok"})
+#         else:
+#             return JsonResponse({"status":"faild"},status=422)
+#     def get(self,request):
+#         return render(request,"register.html")
+# class Login(APIView):
+#     def post(self,request):
+#         serilize = LoginSerilizer(data=request.POST)
+#         if serilize.is_valid(raise_exception=True):
+#             cleaned_data = serilize.validated_data
+#             resp,message=cog.login(cleaned_data["username"],cleaned_data["password"])
+#             if message == "incorrect":
+#                 return Response({"error":True,"message":"username or password invalid"})
+#             elif message == "not_cnofirmed":
+#                 return Response({"error":True,"message":"username is not confirmed"})
+#             else:
+#                 access_token = resp['AuthenticationResult']['AccessToken']
+#                 response = cog.get_user(access_token)
+#
+#                 user = User.objects.filter(username=response["email"]).first()
+#                 refresh = RefreshToken.for_user(user)
+#
+#
+#                 return Response({"error":False,"data":{
+#                     "access_token":str(refresh.access_token),
+#                     "refresh":str(refresh)
+#                 }})
 
 class Profile(APIView):
     permission_classes = [IsAuthenticated]
@@ -68,42 +64,42 @@ class Profile(APIView):
         serilize = UserSerilizer(request.user)
         return Response(serilize.data)
 
-class VerifySignup(APIView):
-    def post(self,request):
-        serilize = VerifySerilizer(data=request.POST)
-        if serilize.is_valid(raise_exception=True):
-            cleaned_data = serilize.validated_data
-            return cog.verify(cleaned_data["username"],cleaned_data["code"])
-    def get(self,request):
-        return render(request,"confirm_email.html")
-class ResendCode(APIView):
-    def post(self,request):
-        serilize = ResendCodeSerilizer(data=request.POST)
-        if serilize.is_valid(raise_exception=True):
-            cleaned_data = serilize.validated_data
-            return cog.resend_confirmation(cleaned_data["username"])
+# class VerifySignup(APIView):
+#     def post(self,request):
+#         serilize = VerifySerilizer(data=request.POST)
+#         if serilize.is_valid(raise_exception=True):
+#             cleaned_data = serilize.validated_data
+#             return cog.verify(cleaned_data["username"],cleaned_data["code"])
+#     def get(self,request):
+#         return render(request,"confirm_email.html")
+# class ResendCode(APIView):
+#     def post(self,request):
+#         serilize = ResendCodeSerilizer(data=request.POST)
+#         if serilize.is_valid(raise_exception=True):
+#             cleaned_data = serilize.validated_data
+#             return cog.resend_confirmation(cleaned_data["username"])
 
-class ForgotPassword(APIView):
-    def post(self,request):
-        serilize = ForgotPasswordSerilizer(data=request.POST)
-        if serilize.is_valid(raise_exception=True):
-            cleaned_data = serilize.validated_data
-            resp = cog.forgot_password(cleaned_data["username"])
-            return resp
-    def get(self,request):
-        return render(request,"forgot_password.html")
+# class ForgotPassword(APIView):
+#     def post(self,request):
+#         serilize = ForgotPasswordSerilizer(data=request.POST)
+#         if serilize.is_valid(raise_exception=True):
+#             cleaned_data = serilize.validated_data
+#             resp = cog.forgot_password(cleaned_data["username"])
+#             return resp
+#     def get(self,request):
+#         return render(request,"forgot_password.html")
 
-class ConfirmForgotPassword(APIView):
-    def post(self,request):
-        serilize = ConfirmForgotPasswordSerilizer(data=request.POST)
-        if serilize.is_valid(raise_exception=True):
-            cleaned_data = serilize.validated_data
-            resp = cog.confirm_forgot_password(cleaned_data["username"],
-            cleaned_data["password"],
-            cleaned_data["code"])
-            return resp
-    def get(self,request):
-        return render(request,"verify_forgot_password.html")
+# class ConfirmForgotPassword(APIView):
+#     def post(self,request):
+#         serilize = ConfirmForgotPasswordSerilizer(data=request.POST)
+#         if serilize.is_valid(raise_exception=True):
+#             cleaned_data = serilize.validated_data
+#             resp = cog.confirm_forgot_password(cleaned_data["username"],
+#             cleaned_data["password"],
+#             cleaned_data["code"])
+#             return resp
+#     def get(self,request):
+#         return render(request,"verify_forgot_password.html")
 
 class CreateNote(APIView):
     permission_classes = [AllowAny]
